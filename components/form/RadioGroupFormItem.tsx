@@ -67,7 +67,7 @@ const RadioGroupFormItem: React.FC<TextInputFormItemProps> = ({
           defaultValue={value}
         >
           {options.map((option: any) => (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2" key={option.id}>
               <RadioGroupItem value={option.value} id={option.id} />
               <Label htmlFor={option.id}>{option.label}</Label>
             </div>

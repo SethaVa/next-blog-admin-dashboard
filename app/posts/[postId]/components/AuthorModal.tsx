@@ -45,8 +45,6 @@ const AuthorModal: React.FC<AuthorModalProps> = ({
 
       setSelectedAuthorId(selectedAuthorId);
     }
-
-    onClose();
   }, [rowSelection]);
 
   if (!isOpen) return null;
