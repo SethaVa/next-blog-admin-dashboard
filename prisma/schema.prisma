@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Category{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String 
+  isPublished Boolean @default(false)
+  v        Int    @default(0) @map("__v") @ignore
+
+  posts    Post[]   @relation(fields: [post_ids], references: [id])
+  post_ids String[] @db.ObjectId
+
+  @@map("categories")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Author{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  photo       String
+  bio         String
+  isPublished Boolean @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  v       Int           @default(0) @map("__v") @ignore 
+  posts   Post[]
+}
+
+model Post{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String
+  excerpt     Json
+  content     Json
+  featuredImage Json
+  isFeaturePost Boolean @default(false)
+
+  v           Int    @default(0) @map("__v") @ignore
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  author       Author   @relation(fields: [authorId], references: [id])
+  authorId     String @map("author") @db.ObjectId
+
+  categories   Category[] @relation(fields: [categoryIds], references: [id])
+  categoryIds  String[]   @db.ObjectId
+
+  @@map("posts")
+}
