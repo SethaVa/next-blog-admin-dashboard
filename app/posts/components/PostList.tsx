@@ -20,7 +20,10 @@ interface PostListProps {
 const PostList: React.FC<PostListProps> = ({ data }) => {
   const router = useRouter();
   return (
-    <div className="bg-white h-full flex-1 p-8 pt-6 space-y-4">
+    <div
+      className="bg-white h-full flex-1 p-8 pt-6 space-y-4"
+      style={{ overflow: "auto", height: "100vh" }}
+    >
       <div className="flex justify-between items-center">
         <Heading title="Post" description="Manage posts for your blog" />
         <Button onClick={() => router.push("/posts/new")}>
