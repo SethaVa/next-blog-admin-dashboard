@@ -20,7 +20,7 @@ Key Features:
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/SethaVa/next-blog.git
+git clone https://github.com/SethaVa/next-blog-admin-dashboard.git
 ```
 
 ### Install packages
